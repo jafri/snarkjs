@@ -16,6 +16,7 @@ var ejs = require('ejs');
 var circom_runtime = require('circom_runtime');
 var jsSha3 = require('js-sha3');
 var Logger = require('logplease');
+var web3 = require('web3');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -5365,7 +5366,19 @@ async function exportSolidityVerifier(zKeyName, templates, logger) {
 
     let template = templates[verificationKey.protocol];
 
-    return ejs__default["default"].render(template ,  verificationKey);
+    return ejs__default["default"].render(template ,  {
+        ...verificationKey,
+        toHex: (s) => {
+            if (s == 0) {
+                return `U256.Zero`
+            } else if (s == 1) {
+                return `U256.One`
+            }
+            const hex = web3.utils.numberToHex(s)
+
+            return `U256.fromBytesBE(H2B(\'${web3.utils.padLeft(hex, 64).slice(2)}\'))`
+        }
+    })
 }
 
 /*

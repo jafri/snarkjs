@@ -1,5 +1,5 @@
 {
-  "name": "snarkjs",
+  "name": "@jafri/snarkjs",
   "type": "module",
   "version": "0.4.22",
   "description": "zkSNARKs implementation in JavaScript",
@@ -46,7 +46,8 @@
     "ffjavascript": "0.2.55",
     "js-sha3": "^0.8.0",
     "logplease": "^1.2.15",
-    "r1csfile": "0.0.36"
+    "r1csfile": "0.0.36",
+    "web3": "^1.7.4"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^22.0.0",
